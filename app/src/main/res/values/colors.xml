@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="colorPrimary" tools:ignore="UnusedResources">#3F51B5</color>
+    <color name="colorPrimaryDark" tools:ignore="UnusedResources">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="card_header_margin_color">#bbbbbb</color>
+    <color name="card_title_text_color">#123456</color>
+    <color name="card_data_text_color">#1E88E5</color>
+    <color name="toolbar_color">#800000</color>
+    <color name="transp_toolbar_color" tools:ignore="UnusedResources">#32EE4611</color>
+    <color name="toolbar_color_dark">#800000</color>
+    <color name="details_recycler_bg">#dddddd</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="divider">#123456</color>
+</resources>

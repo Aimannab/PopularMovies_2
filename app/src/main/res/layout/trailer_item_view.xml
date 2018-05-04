@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/card_margin"
+    android:background="@color/card_header_margin_color"
+    android:orientation="vertical">
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/trailername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center_vertical"
+        android:minHeight="?attr/actionBarSize"
+        android:paddingLeft="@dimen/card_title_padding"
+        android:text="trailer1"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@color/card_data_text_color"
+        android:background="@android:color/white"
+        android:textStyle="normal"
+        tools:ignore="HardcodedText,RtlSymmetry,UnusedAttribute"
+        android:paddingStart="@dimen/card_title_padding" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="@color/divider"/>
+
+</LinearLayout>

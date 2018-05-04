@@ -1,0 +1,34 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">PopularMovies</string>
+    <string name="hello_world" tools:ignore="UnusedResources">Hello world!</string>
+    <string name="title_activity_details" tools:ignore="UnusedResources">DetailsActivity</string>
+    <string name="action_most_popular">MostPopular</string>
+    <string name="action_top_rated">TopRated</string>
+    <string name="release_date">Release Date</string>
+    <string name="original_language">Original Language</string>
+    <string name="overview">Movie Overview</string>
+    <string name="average_rating">Average Rating</string>
+    <string name="popularity">Popularity</string>
+    <string name="total_rating">Total Rating</string>
+    <string name="title_main" tools:ignore="UnusedResources">Movie-yes</string>
+    <string name="reviews" tools:ignore="UnusedResources">Read Reviews</string>
+    <string name="read_reviews" tools:ignore="UnusedResources">Click here to read reviews</string>
+    <string name="network_error">Please Check the internet connection</string>
+    <string name="no_trailers">No Trailers</string>
+    <string name="no_reviews" tools:ignore="UnusedResources">No Reviews</string>
+    <string name="default_fav_movie_name">FavMovies</string>
+    <string name="mark_as_favourite">Mark as Favourite</string>
+    <string name="sort_favourite" tools:ignore="UnusedResources">favourites</string>
+    <string name="sort_order_key" tools:ignore="UnusedResources">sort_order</string>
+    <string name="sort_popularity" tools:ignore="UnusedResources">popularity.desc</string>
+    <plurals name="trailers_qty">
+        <item quantity="one">%d Trailer - click on title to view trailer</item>
+        <item quantity="other">%d Trailers - click on title to view trailer</item>
+    </plurals>
+    <plurals name="reviews_qty" tools:ignore="UnusedResources">
+        <item quantity="one">%d Review</item>
+        <item quantity="other">%d Reviews</item>
+    </plurals>
+
+
+</resources>
