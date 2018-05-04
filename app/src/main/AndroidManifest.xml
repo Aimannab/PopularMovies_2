@@ -30,6 +30,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-    </application>
+        <activity
+            android:name=".FavoriteListActivity"
+            android:parentActivityName=".MainActivity"/>
+
+</application>
 
 </manifest>
