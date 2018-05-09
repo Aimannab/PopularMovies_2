@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
 
             //Add FavoriteListActivity here
             Intent favoritesListIntent = new Intent(this, FavoriteListActivity.class);
-            favoritesListIntent.putExtra("title", movieObject.getTitle());                          //check this!! try replacing it with movieobject OR geAllFavMovies() query
+            //favoritesListIntent.putExtra("title", movieObject.getTitle());                          //check this!! try replacing it with movieobject OR geAllFavMovies() query
             startActivity(favoritesListIntent);
 
         }

@@ -181,20 +181,19 @@ public class DetailsActivityFragment extends Fragment {
         setValuesToView(view.findViewById(R.id.popularity), getString(R.string.popularity), "Approx: " + movieObject.getPopularity());
         //setting total rating
         setValuesToView(view.findViewById(R.id.total_rating), getString(R.string.total_rating), "Approx: " + movieObject.getVoteCount());
-        //Not implemented yet
         //setting show review
-        /*setValuesToView(view.findViewById(R.id.reviews), getString(R.string.reviews), getString(R.string.read_reviews));
+        setValuesToView(view.findViewById(R.id.reviews), getString(R.string.reviews), getString(R.string.read_reviews));
         view.findViewById(R.id.reviews).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (NetworkUtils.isNetworkAvailable(getActivity())) {
                     //Passing empty string will get movies list sorted by original title in ascending order.
-                    //requestServer(MOVIE_REVIEW_QUERY, PURPOSE_REVIEWS, movieObject.getId());
+                    requestServer(MOVIE_REVIEW_QUERY, MOVIE_PURPOSE_REVIEWS, movieObject.getId());
                 } else {
                     Toast.makeText(getActivity(), R.string.network_error, Toast.LENGTH_SHORT).show();
                 }
             }
-        });*/
+        });
     }
 
     //Setting up Title and Data TextViews via detail_recycler_item.xml
@@ -259,10 +258,8 @@ public class DetailsActivityFragment extends Fragment {
                             trailers_view.addView(view);
                         }
                     }
-            }
-                    //break;
-                //Not implemented yet
-                /*case PURPOSE_REVIEWS:
+                    break;
+                case MOVIE_PURPOSE_REVIEWS:
                     final ReviewsResponse reviewsResponse = new Gson().fromJson(response.toString(), ReviewsResponse.class);
                     int reviews = reviewsResponse.getTotalresults();
                     if (reviews > 0) {
@@ -271,9 +268,10 @@ public class DetailsActivityFragment extends Fragment {
                         intent.putExtra("reviewsObject", reviewsResponse);
                         startActivity(intent);
                     } else {
-                        ((TextView)getView().findViewById(R.id.reviews).findViewById(R.id.data)).setText(getString(R.string.no_reviews));
+                        ((TextView) getView().findViewById(R.id.reviews).findViewById(R.id.data)).setText(getString(R.string.no_reviews));
                     }
-                    break;*/
+                    break;
+            }
 
     }
 

@@ -40,6 +40,7 @@ public class FavoriteMoviesListAdapter extends RecyclerView.Adapter<FavoriteMovi
         return new FavoritesViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(FavoritesViewHolder holder, int position) {
         if(!mCursor.moveToPosition(position))
@@ -66,19 +67,19 @@ public class FavoriteMoviesListAdapter extends RecyclerView.Adapter<FavoriteMovi
         // Will display the guest name
         TextView nameTextView;
         // Will display the party size number
-        TextView partySizeTextView;
+        //TextView partySizeTextView;
 
         /**
          * Constructor for our ViewHolder. Within this constructor, we get a reference to our
          * TextViews
          *
          * @param itemView The View that you inflated in
-         *                 {@link FavoritesListAdapter#onCreateViewHolder(ViewGroup, int)}
+         *                 {@link FavoriteMoviesListAdapter#onCreateViewHolder(ViewGroup, int)}
          */
         public FavoritesViewHolder(View itemView) {
             super(itemView);
             nameTextView = (TextView) itemView.findViewById(R.id.name_text_view);
-            partySizeTextView = (TextView) itemView.findViewById(R.id.party_size_text_view);
+            //partySizeTextView = (TextView) itemView.findViewById(R.id.party_size_text_view);
         }
 
     }

@@ -1,6 +1,9 @@
 package com.example.android.popularmovies;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by Aiman Nabeel on 11/04/2018.
@@ -10,7 +13,7 @@ import java.io.Serializable;
 @SuppressWarnings("ALL")
 public class ReviewsResponse implements Serializable {
 
-    /*@SerializedName("results")
+    @SerializedName("results")
     private ArrayList<ReviewObject> reviewObjectArrayList;
 
     @SerializedName("id")
@@ -73,5 +76,5 @@ public class ReviewsResponse implements Serializable {
         public String getUrl() {
             return url;
         }
-    }*/
+    }
 }
