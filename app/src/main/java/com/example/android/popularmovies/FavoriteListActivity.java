@@ -18,23 +18,19 @@ public class FavoriteListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_favorite_list);
+        //setContentView(R.layout.activity_favorite_list); --wrong id
+        setContentView(R.layout.all_favorite_movies_view);
 
         RecyclerView favlistRecyclerView;
         favlistRecyclerView = new RecyclerView(this);
-        //LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 
         favlistRecyclerView = (RecyclerView) this.findViewById(R.id.all_favorite_movies_view);
 
         favlistRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         //favlistRecyclerView.setLayoutManager(layoutManager);
-
-
         //RecyclerView waitlistRecyclerView;
-
         // Set local attributes to corresponding views
         //waitlistRecyclerView = (RecyclerView) this.findViewById(R.id.all_guests_list_view);
-
         // Set layout for the RecyclerView, because it's a list we are using the linear layout
         //waitlistRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -43,7 +39,7 @@ public class FavoriteListActivity extends AppCompatActivity {
         mDb = dbHelper.getWritableDatabase();
 
         //Inserting fake data
-        //TestUtil.insertFakeData(mDb);
+        TestUtil.insertFakeData(mDb);
 
         Cursor cursor = getAllFavoriteMovies();
         mAdapter = new FavoriteMoviesListAdapter(this, cursor);

@@ -11,6 +11,7 @@ import java.util.List;
  * Created by Aiman Nabeel on 08/05/2018.
  */
 
+//Adding fake data to try out the Menu Button
 public class TestUtil {
 
     public static void insertFakeData(SQLiteDatabase db){
@@ -25,12 +26,12 @@ public class TestUtil {
         cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_ID, 299536);
         list.add(cv);
 
-        /*cv = new ContentValues();
-        cv.put(WaitlistContract.WaitlistEntry.COLUMN_GUEST_NAME, "Tim");
-        cv.put(WaitlistContract.WaitlistEntry.COLUMN_PARTY_SIZE, 2);
+        cv = new ContentValues();
+        cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_TITLE, "Fifty Shades Freed");
+        cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_ID, 337167);
         list.add(cv);
 
-        cv = new ContentValues();
+        /*cv = new ContentValues();
         cv.put(WaitlistContract.WaitlistEntry.COLUMN_GUEST_NAME, "Jessica");
         cv.put(WaitlistContract.WaitlistEntry.COLUMN_PARTY_SIZE, 99);
         list.add(cv);
