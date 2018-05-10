@@ -27,6 +27,8 @@ public class FavoriteListActivity extends AppCompatActivity {
         favlistRecyclerView = (RecyclerView) this.findViewById(R.id.all_favorite_movies_view);
 
         favlistRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        //E.g.
         //favlistRecyclerView.setLayoutManager(layoutManager);
         //RecyclerView waitlistRecyclerView;
         // Set local attributes to corresponding views

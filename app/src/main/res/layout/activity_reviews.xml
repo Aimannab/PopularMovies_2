@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     tools:ignore="UnusedResources">
 
-    <include
+    <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_reviews"
         style="@style/ThemeToolbar"
         layout="@layout/toolbar_layout"
