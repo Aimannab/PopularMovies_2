@@ -1,12 +1,16 @@
 package com.example.android.popularmovies;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
+
+import static android.app.PendingIntent.getActivity;
 
 
 /**
@@ -20,6 +24,7 @@ public class ReviewsActivity extends AppCompatActivity {
     ReviewsResponse reviewsResponse;
     ListView reviews_list_view;
     ReviewsListAdapter mAdapter;
+    Activity activity;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -41,6 +46,14 @@ public class ReviewsActivity extends AppCompatActivity {
         TextView titleTextView = (TextView) findViewById(R.id.title);
         int count = reviewsResponse.getTotalresults();
         String reviews = getResources().getQuantityString(R.plurals.reviews_qty,count,count);
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+
+        /*if (toolbar != null) {
+            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+            toolbar.hideOverflowMenu();
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }*/
+
         titleTextView.setText(reviews);
 
 
@@ -53,4 +66,9 @@ public class ReviewsActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    /*public Object getActivity() {
+        activity = this;
+        return activity;
+    }*/
 }

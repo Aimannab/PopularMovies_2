@@ -2,6 +2,7 @@
 <!--suppress ALL -->
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment"
     android:layout_width="match_parent"
@@ -14,18 +15,21 @@
         layout="@layout/toolbar_layout"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:background="@color/black"
+        app:titleTextColor="@color/white" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_below="@+id/toolbar_reviews"
-        android:background="@color/transp_toolbar_color"
+        android:background="@color/details_recycler_bg"
         android:fontFamily="sans-serif-condensed"
         android:gravity="center"
         android:textAppearance="?android:textAppearanceLarge"
-        android:textColor="@color/toolbar_color"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         tools:ignore="UnusedAttribute" />
 
     <ListView
