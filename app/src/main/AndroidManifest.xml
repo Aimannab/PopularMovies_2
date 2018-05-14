@@ -36,6 +36,10 @@
         <activity
             android:name=".ReviewsActivity"
             android:parentActivityName=".DetailActivity"/>
+        <provider
+            android:name="com.example.android.popularmovies.FavoritesContentProvider"
+            android:authorities="com.example.android.popularmovies"
+            android:exported="false"/>
 
 </application>
 
