@@ -52,13 +52,35 @@ public class FavoritesContentProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Cursor query(@NonNull Uri uri, @Nullable String[] strings, @Nullable String s, @Nullable String[] strings1, @Nullable String s1) {
+    public Cursor query(@NonNull Uri uri, String[] projection, String selection,
+                        String[] selectionArgs, String sortOrder) {
 
         //Geting access to underlying database, for query(Read-only)
         final SQLiteDatabase db = moviesDbHelper.getReadableDatabase();
 
+        int match = sUriMatcher.match(uri);
 
-        return null;
+        Cursor retCursor;
+
+        //Query for all FAVORITES
+        switch (match) {
+            case FAVORITES:
+                retCursor = db.query(TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder);
+            break;
+            default:
+                throw new UnsupportedOperationException("Unknown Uri: " + uri);
+        }
+
+        retCursor.setNotificationUri(getContext().getContentResolver(), uri);
+        //throw  new UnsupportedOperationException("Not yet implemented");
+
+        return retCursor;
     }
 
     @Nullable

@@ -58,7 +58,10 @@ public class FavoriteListActivity extends AppCompatActivity {
     }
 
 
-    public void onMovieMarkedAsFavorite(View view) {
+
+
+    //Not required. Check DetailActivityFragment code
+    /*public void onMovieMarkedAsFavorite(View view) {
 
         CheckBox favCheckbox = findViewById(R.id.isFavoriteCheckBox);
 
@@ -67,7 +70,7 @@ public class FavoriteListActivity extends AppCompatActivity {
 
         }*/
 
-        favCheckbox.setOnClickListener(new View.OnClickListener() {
+        /*favCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 movieid = movieObject.getId();
@@ -91,13 +94,13 @@ public class FavoriteListActivity extends AppCompatActivity {
         Uri uri = getContentResolver().insert(FavoriteMovieListContract.ListEntry.CONTENT_URI, cv);
 
         //Checking if data is being successfullyinserted by displaying URI
-        //if(uri != null) {
-        //    Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
-        //}
+        if(uri != null) {
+            Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
+        }
 
         //finish();
 
-    }
+    }*/
 
     private Cursor getAllFavoriteMovies() {
         return mDb.query(FavoriteMovieListContract.ListEntry.TABLE_NAME,

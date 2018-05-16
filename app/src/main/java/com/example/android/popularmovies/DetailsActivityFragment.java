@@ -1,6 +1,8 @@
 package com.example.android.popularmovies;
 
 import android.content.ActivityNotFoundException;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -36,6 +38,9 @@ import com.squareup.picasso.Target;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Aiman Nabeel on 05/04/18
  */
@@ -56,6 +61,8 @@ public class DetailsActivityFragment extends Fragment {
     CollapsingToolbarLayout collapsingToolbar;
     ImageView header;
     Movie movieObject;
+    long movieid;
+    ContentResolver contentResolver;
 
     final String MOVIE_BASE_URL = "http://api.themoviedb.org/3/movie/";
     //TODO Remove this key before uploading the project
@@ -87,6 +94,7 @@ public class DetailsActivityFragment extends Fragment {
             }
         }
 
+        //Setting up Favorite Checkbox
         CheckBox FavoriteCheckBox = (CheckBox) view.findViewById(R.id.isFavoriteCheckBox);
         FavoriteCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -98,6 +106,16 @@ public class DetailsActivityFragment extends Fragment {
         boolean isFavourite = PreferenceManager.getDefaultSharedPreferences(getActivity())
                 .getBoolean(String.valueOf(movieObject.getId()), false);
         FavoriteCheckBox.setChecked(isFavourite);
+
+        List<ContentValues> list = new ArrayList<ContentValues>();
+
+        ContentValues cv = new ContentValues();
+        cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_TITLE, movieObject.getTitle());
+        cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_ID, movieObject.getId());
+        list.add(cv);
+
+        //Inserting new FavMovie data via ContentResolver
+        Uri uri = getContentResolver().insert(FavoriteMovieListContract.ListEntry.CONTENT_URI, cv);
 
         bindDataToView(view);
         return view;
@@ -285,6 +303,10 @@ public class DetailsActivityFragment extends Fragment {
                     Uri.parse("http://www.youtube.com/watch?v=" + id));
             startActivity(intent);
         }
+    }
+
+    public ContentResolver getContentResolver() {
+        return this.contentResolver;
     }
 }
 

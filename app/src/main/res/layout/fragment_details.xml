@@ -65,8 +65,7 @@
                 android:background="@null"
                 android:button="@drawable/favorite_checkbox"
                 android:checked="false"
-                android:text="@string/mark_as_favourite"
-                android:onClick="onMovieMarkedAsFavorite" />
+                android:text="@string/mark_as_favourite" />
 
             <include
                 android:id="@+id/release_date"
