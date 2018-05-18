@@ -3,6 +3,7 @@ package com.example.android.popularmovies;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -13,6 +14,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
@@ -63,6 +65,8 @@ public class DetailsActivityFragment extends Fragment {
     Movie movieObject;
     long movieid;
     ContentResolver contentResolver;
+    Context baseContext;
+    private static final int FAVMOVIE_LOADER_ID = 0;
 
     final String MOVIE_BASE_URL = "http://api.themoviedb.org/3/movie/";
     //TODO Remove this key before uploading the project
@@ -95,27 +99,53 @@ public class DetailsActivityFragment extends Fragment {
         }
 
         //Setting up Favorite Checkbox
-        CheckBox FavoriteCheckBox = (CheckBox) view.findViewById(R.id.isFavoriteCheckBox);
+        final CheckBox FavoriteCheckBox = (CheckBox) view.findViewById(R.id.isFavoriteCheckBox);
         FavoriteCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 preferences.edit().putBoolean(String.valueOf(movieObject.getId()), isChecked).apply();
+
             }
         });
-        boolean isFavourite = PreferenceManager.getDefaultSharedPreferences(getActivity())
+        final boolean isFavourite = PreferenceManager.getDefaultSharedPreferences(getActivity())
                 .getBoolean(String.valueOf(movieObject.getId()), false);
         FavoriteCheckBox.setChecked(isFavourite);
 
-        List<ContentValues> list = new ArrayList<ContentValues>();
 
-        ContentValues cv = new ContentValues();
-        cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_TITLE, movieObject.getTitle());
-        cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_ID, movieObject.getId());
-        list.add(cv);
+        //Implementing onClickListener on the "Mark as Favorite" button and linking it with the Content Resolver
+            FavoriteCheckBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-        //Inserting new FavMovie data via ContentResolver
-        Uri uri = getContentResolver().insert(FavoriteMovieListContract.ListEntry.CONTENT_URI, cv);
+                        List<ContentValues> list = new ArrayList<ContentValues>();
+
+                        ContentValues cv = new ContentValues();
+                        cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_TITLE, movieObject.getTitle());
+                        cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_ID, movieObject.getId());
+                        list.add(cv);
+
+                        baseContext = getContext();
+
+                        //Inserting new FavMovie data via ContentResolver
+                        Uri uri = baseContext.getContentResolver().insert(FavoriteMovieListContract.ListEntry.CONTENT_URI, cv);
+
+                        //if (uri == null) Toast.makeText(baseContext.getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
+
+                        FavoriteCheckBox.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                //Deleting
+                                baseContext.getContentResolver().delete(FavoriteMovieListContract.ListEntry.CONTENT_URI, null, null);
+                                getLoaderManager().restartLoader(FAVMOVIE_LOADER_ID, null, (LoaderManager.LoaderCallbacks<Object>) DetailsActivityFragment.this);
+
+                            }
+                        });
+
+                    }
+
+            });
+
 
         bindDataToView(view);
         return view;
@@ -305,9 +335,6 @@ public class DetailsActivityFragment extends Fragment {
         }
     }
 
-    public ContentResolver getContentResolver() {
-        return this.contentResolver;
-    }
 }
 
 
