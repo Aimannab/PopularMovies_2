@@ -65,7 +65,7 @@ public class DetailsActivityFragment extends Fragment {
     Movie movieObject;
     long movieid;
     ContentResolver contentResolver;
-    Context baseContext;
+    Context baseContext = this.getContext();
     private static final int FAVMOVIE_LOADER_ID = 0;
 
     final String MOVIE_BASE_URL = "http://api.themoviedb.org/3/movie/";
@@ -83,16 +83,19 @@ public class DetailsActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_details, container, false);
-        if(getArguments() != null) {
-            movieObject = (Movie)getArguments().getSerializable("movieObject");
+        if (getArguments() != null) {
+            movieObject = (Movie) getArguments().getSerializable("movieObject");
             if (NetworkUtils.isNetworkAvailable(getActivity())) {
                 //Using Handler class to delay loading this view, so it's ready for all the responses and shows them every time a movie is clicked
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
-                    @Override public void run() {
-                        requestServer(MOVIE_TRAILER_QUERY, MOVIE_PURPOSE_TRAILER, movieObject.getId()); } }, 200);
-                        //Instead of just this line of code
-                        //requestServer(MOVIE_TRAILER_QUERY, MOVIE_PURPOSE_TRAILER, movieObject.getId());
+                    @Override
+                    public void run() {
+                        requestServer(MOVIE_TRAILER_QUERY, MOVIE_PURPOSE_TRAILER, movieObject.getId());
+                    }
+                }, 200);
+                //Instead of just this line of code
+                //requestServer(MOVIE_TRAILER_QUERY, MOVIE_PURPOSE_TRAILER, movieObject.getId());
             } else {
                 Toast.makeText(getActivity(), R.string.network_error, Toast.LENGTH_SHORT).show();
             }
@@ -114,38 +117,53 @@ public class DetailsActivityFragment extends Fragment {
 
 
         //Implementing onClickListener on the "Mark as Favorite" button and linking it with the Content Resolver
-            FavoriteCheckBox.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        FavoriteCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                        List<ContentValues> list = new ArrayList<ContentValues>();
+                List<ContentValues> list = new ArrayList<ContentValues>();
 
-                        ContentValues cv = new ContentValues();
-                        cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_TITLE, movieObject.getTitle());
-                        cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_ID, movieObject.getId());
-                        list.add(cv);
+                if (isFavourite == true) {
 
-                        baseContext = getContext();
+                    ContentValues cv = new ContentValues();
+                    cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_TITLE, movieObject.getTitle());
+                    cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_ID, movieObject.getId());
+                    list.add(cv);
 
-                        //Inserting new FavMovie data via ContentResolver
-                        Uri uri = baseContext.getContentResolver().insert(FavoriteMovieListContract.ListEntry.CONTENT_URI, cv);
 
-                        //if (uri == null) Toast.makeText(baseContext.getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
 
-                        FavoriteCheckBox.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                //Deleting
-                                baseContext.getContentResolver().delete(FavoriteMovieListContract.ListEntry.CONTENT_URI, null, null);
-                                getLoaderManager().restartLoader(FAVMOVIE_LOADER_ID, null, (LoaderManager.LoaderCallbacks<Object>) DetailsActivityFragment.this);
+                    //Inserting new FavMovie data via ContentResolver
+                    Uri uri = getActivity().getContentResolver().insert(FavoriteMovieListContract.ListEntry.CONTENT_URI, cv);
+                    //if (uri == null) Toast.makeText(baseContext.getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
 
-                            }
-                        });
+
+                } else {
+
+                    //Deleting
+                    int id = (int) movieObject.getId();
+                    String stringId = Integer.toString(id);
+                    Uri uri = FavoriteMovieListContract.ListEntry.CONTENT_URI;
+                    uri = uri.buildUpon().appendPath(stringId).build();
+
+                    getActivity().getContentResolver().delete(uri, null, null);
+                    getLoaderManager().restartLoader(FAVMOVIE_LOADER_ID, null, (LoaderManager.LoaderCallbacks<Object>) DetailsActivityFragment.this);
+                }
+
+            }
+
+        });
+
+            /*if (FavoriteCheckBox.isChecked()) {
+                FavoriteCheckBox.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        baseContext.getContentResolver().delete(FavoriteMovieListContract.ListEntry.CONTENT_URI, null, null);
+                        getLoaderManager().restartLoader(FAVMOVIE_LOADER_ID, null, (LoaderManager.LoaderCallbacks<Object>) DetailsActivityFragment.this);
 
                     }
-
-            });
-
+                });
+            }*/
 
         bindDataToView(view);
         return view;
@@ -336,5 +354,3 @@ public class DetailsActivityFragment extends Fragment {
     }
 
 }
-
-
