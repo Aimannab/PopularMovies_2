@@ -49,13 +49,6 @@ public class FavoriteListActivity extends AppCompatActivity implements
         FavoriteMoviesDbHelper dbHelper = new FavoriteMoviesDbHelper(this);
         mDb = dbHelper.getWritableDatabase();
 
-        //Inserting fake data
-        //TestUtil.insertFakeData(mDb);
-
-        //if (mDb == null) {
-        //    return;
-        //}
-
         Cursor cursor = getAllFavoriteMovies();
         mAdapter = new FavoriteMoviesListAdapter(this, cursor);
 

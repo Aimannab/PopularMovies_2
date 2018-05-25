@@ -125,28 +125,19 @@ public class DetailsActivityFragment extends Fragment /*implements LoaderManager
         FavoriteCheckBox.setChecked(isFavourite);
 
 
+
+        ;
+
         //Implementing onClickListener on the "Mark as Favorite" button and linking it with the Content Resolver
         FavoriteCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Context context = view.getContext();
                 List<ContentValues> list = new ArrayList<ContentValues>();
+                Context context = view.getContext();
                 ContentValues cv = new ContentValues();
 
                 if (isFavourite == true) {
-
-
-                    cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_TITLE, movieObject.getTitle());
-                    cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_ID, movieObject.getId());
-                    list.add(cv);
-
-                    //Inserting new FavMovie data via ContentResolver
-                    Uri uri = getActivity().getContentResolver().insert(FavoriteMovieListContract.ListEntry.CONTENT_URI, cv);
-                    //if (uri == null) Toast.makeText(baseContext.getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
-
-
-                } else {
 
                     //Deleting
                     int id = (int) movieObject.getId();
@@ -156,16 +147,20 @@ public class DetailsActivityFragment extends Fragment /*implements LoaderManager
 
                     context.getContentResolver().delete(uri, null, null);
 
-                    //Updating
-                    //context.getContentResolver().update(uri, cv, null,null);
+
+                } else {
+
+                    cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_TITLE, movieObject.getTitle());
+                    cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_ID, movieObject.getId());
+                    list.add(cv);
+
+                    //Inserting new FavMovie data via ContentResolver
+                    Uri uri = getActivity().getContentResolver().insert(FavoriteMovieListContract.ListEntry.CONTENT_URI, cv);
+                    //if (uri == null) Toast.makeText(baseContext.getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
+
                 }
-
-
-
             }
-
         });
-
 
         bindDataToView(view);
         return view;

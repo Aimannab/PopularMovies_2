@@ -31,7 +31,6 @@ public class FavoriteMovieListContract {
         public static final String TABLE_NAME = "Favorite_Movies_List";
         public static final String COLUMN_NAME_MOVIE_TITLE = "title";
         public static final String COLUMN_NAME_MOVIE_ID = "id";
-
     }
 }
 
