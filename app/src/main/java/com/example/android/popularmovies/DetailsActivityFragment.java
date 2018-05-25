@@ -6,15 +6,19 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.AsyncTaskLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,11 +28,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.Checkable;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.support.v4.widget.CursorAdapter;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -57,7 +67,7 @@ import java.util.List;
         ***************************************************************************************/
 
 
-public class DetailsActivityFragment extends Fragment {
+public class DetailsActivityFragment extends Fragment /*implements LoaderManager.LoaderCallbacks<Cursor>*/ {
 
     LinearLayoutManager LayoutManager;
     CollapsingToolbarLayout collapsingToolbar;
@@ -65,7 +75,6 @@ public class DetailsActivityFragment extends Fragment {
     Movie movieObject;
     long movieid;
     ContentResolver contentResolver;
-    Context baseContext = this.getContext();
     private static final int FAVMOVIE_LOADER_ID = 0;
 
     final String MOVIE_BASE_URL = "http://api.themoviedb.org/3/movie/";
@@ -121,11 +130,13 @@ public class DetailsActivityFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                Context context = view.getContext();
                 List<ContentValues> list = new ArrayList<ContentValues>();
+                ContentValues cv = new ContentValues();
 
                 if (isFavourite == true) {
 
-                    ContentValues cv = new ContentValues();
+
                     cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_TITLE, movieObject.getTitle());
                     cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_ID, movieObject.getId());
                     list.add(cv);
@@ -145,25 +156,18 @@ public class DetailsActivityFragment extends Fragment {
                     Uri uri = FavoriteMovieListContract.ListEntry.CONTENT_URI;
                     uri = uri.buildUpon().appendPath(stringId).build();
 
-                    getActivity().getContentResolver().delete(uri, null, null);
-                    getLoaderManager().restartLoader(FAVMOVIE_LOADER_ID, null, (LoaderManager.LoaderCallbacks<Object>) DetailsActivityFragment.this);
+                    context.getContentResolver().delete(uri, null, null);
+
+                    //Updating
+                    context.getContentResolver().update(uri, cv, null,null);
                 }
+
+
 
             }
 
         });
 
-            /*if (FavoriteCheckBox.isChecked()) {
-                FavoriteCheckBox.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        baseContext.getContentResolver().delete(FavoriteMovieListContract.ListEntry.CONTENT_URI, null, null);
-                        getLoaderManager().restartLoader(FAVMOVIE_LOADER_ID, null, (LoaderManager.LoaderCallbacks<Object>) DetailsActivityFragment.this);
-
-                    }
-                });
-            }*/
 
         bindDataToView(view);
         return view;
@@ -354,3 +358,5 @@ public class DetailsActivityFragment extends Fragment {
     }
 
 }
+
+

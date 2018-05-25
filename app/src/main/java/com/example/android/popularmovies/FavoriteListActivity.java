@@ -29,7 +29,6 @@ public class FavoriteListActivity extends AppCompatActivity implements
     private SQLiteDatabase mDb;
     Movie movieObject;
     long movieid;
-    //Context context = FavoriteListActivity.this;
 
     private static final String TAG = FavoriteListActivity.class.getSimpleName();
     private static final int FAVMOVIE_LOADER_ID = 0;
@@ -63,10 +62,11 @@ public class FavoriteListActivity extends AppCompatActivity implements
         //Linking the FavoritesMovies adapter to RecyclerView
         favlistRecyclerView.setAdapter(mAdapter);
 
+        getSupportLoaderManager().restartLoader(FAVMOVIE_LOADER_ID, null, this);
+
     }
 
 
-    //*******************************************************************************************
 
     /**
      * This method is called after this activity has been paused or restarted.
@@ -165,7 +165,6 @@ public class FavoriteListActivity extends AppCompatActivity implements
         mAdapter.swapCursor(null);
     }
 
-    //*******************************************************************************************
 
 
     private Cursor getAllFavoriteMovies() {

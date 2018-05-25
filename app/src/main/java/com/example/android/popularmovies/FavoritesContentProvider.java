@@ -140,7 +140,7 @@ public class FavoritesContentProvider extends ContentProvider {
                 //Getting the task ID from the URI path
                 String id = uri.getPathSegments().get(1);
                 //Using selections/selectionArgs to filter for this ID
-                FavMovieDeleted = db.delete(TABLE_NAME, "_id=?", new String[]{id});
+                FavMovieDeleted = db.delete(TABLE_NAME, "id=?", new String[]{id});
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -159,7 +159,28 @@ public class FavoritesContentProvider extends ContentProvider {
     }
 
     @Override
-    public int update(@NonNull Uri uri, @Nullable ContentValues contentValues, @Nullable String s, @Nullable String[] strings) {
-        return 0;
+    public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
+
+        int taskUpdated;
+        int match = sUriMatcher.match(uri);
+
+        switch (match) {
+            case FAVORITES_WITH_ID:
+                //Updating a single task by getting its id
+                String id = uri.getPathSegments().get(1);
+                taskUpdated = moviesDbHelper.getWritableDatabase().update(TABLE_NAME, values, "id=?", new String[]{id});
+                break;
+                default:
+                    throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+
+        if (taskUpdated != 0) {
+            //setting notifications if task is updated
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        //Return number of tasks updated
+        return taskUpdated;
+        //return 0;
     }
 }
