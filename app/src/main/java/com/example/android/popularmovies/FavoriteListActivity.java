@@ -62,10 +62,10 @@ public class FavoriteListActivity extends AppCompatActivity implements
         //Linking the FavoritesMovies adapter to RecyclerView
         favlistRecyclerView.setAdapter(mAdapter);
 
+        //Restarting loader - Favorites Checkbox
         getSupportLoaderManager().restartLoader(FAVMOVIE_LOADER_ID, null, this);
 
     }
-
 
 
     /**

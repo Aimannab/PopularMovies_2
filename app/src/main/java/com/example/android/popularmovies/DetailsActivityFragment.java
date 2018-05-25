@@ -141,8 +141,6 @@ public class DetailsActivityFragment extends Fragment /*implements LoaderManager
                     cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_ID, movieObject.getId());
                     list.add(cv);
 
-
-
                     //Inserting new FavMovie data via ContentResolver
                     Uri uri = getActivity().getContentResolver().insert(FavoriteMovieListContract.ListEntry.CONTENT_URI, cv);
                     //if (uri == null) Toast.makeText(baseContext.getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
@@ -159,7 +157,7 @@ public class DetailsActivityFragment extends Fragment /*implements LoaderManager
                     context.getContentResolver().delete(uri, null, null);
 
                     //Updating
-                    context.getContentResolver().update(uri, cv, null,null);
+                    //context.getContentResolver().update(uri, cv, null,null);
                 }
 
 
