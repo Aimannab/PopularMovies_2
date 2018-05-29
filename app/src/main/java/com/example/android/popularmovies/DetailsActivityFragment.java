@@ -125,9 +125,6 @@ public class DetailsActivityFragment extends Fragment /*implements LoaderManager
         FavoriteCheckBox.setChecked(isFavourite);
 
 
-
-        ;
-
         //Implementing onClickListener on the "Mark as Favorite" button and linking it with the Content Resolver
         FavoriteCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,6 +33,11 @@ public class FavoriteListActivity extends AppCompatActivity implements
 
     private static final String TAG = FavoriteListActivity.class.getSimpleName();
     private static final int FAVMOVIE_LOADER_ID = 0;
+
+    public static final String[] MAIN_FAVORITES_PROJECTION = {
+            FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_ID,
+
+    };
 
 
     @Override
@@ -81,10 +87,30 @@ public class FavoriteListActivity extends AppCompatActivity implements
      *
      * Implements the required callbacks to take care of loading data at all stages of loading.
      */
+
+
     @Override
     public Loader<Cursor> onCreateLoader(int id, final Bundle loaderArgs) {
 
-        return new AsyncTaskLoader<Cursor>(this) {
+        switch (id) {
+            case FAVMOVIE_LOADER_ID:
+                Uri favoriteQueryUri = FavoriteMovieListContract.ListEntry.CONTENT_URI;
+                String sortOrder = FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_TITLE + " ASC";
+                String selection = FavoriteMovieListContract.ListEntry.getSqlSelectForTodayOnwards();
+                //String selection = null;
+
+                return new CursorLoader(this,
+                        favoriteQueryUri,
+                        MAIN_FAVORITES_PROJECTION,
+                        selection,
+                        null,
+                        sortOrder
+                        );
+                default:
+                    throw new RuntimeException("Loader not implemented: " + id);
+        }
+
+        /*return new AsyncTaskLoader<Cursor>(this) {
 
             // Initialize a Cursor, this will hold all the task data
             Cursor mFavMovieData = null;
@@ -94,6 +120,7 @@ public class FavoriteListActivity extends AppCompatActivity implements
             protected void onStartLoading() {
                 if (mFavMovieData != null) {
                     // Delivers any previously loaded data immediately
+                    
                     deliverResult(mFavMovieData);
                 } else {
                     // Force a new load
@@ -128,7 +155,7 @@ public class FavoriteListActivity extends AppCompatActivity implements
                 mFavMovieData = data;
                 super.deliverResult(data);
             }
-        };
+        };*/
 
     }
 
@@ -141,7 +168,8 @@ public class FavoriteListActivity extends AppCompatActivity implements
      */
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        // Update the data that the adapter uses to create ViewHolders
+
+        // Updating the data that the adapter uses to create ViewHolders
         mAdapter.swapCursor(data);
     }
 

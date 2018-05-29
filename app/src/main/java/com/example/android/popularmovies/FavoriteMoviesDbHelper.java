@@ -24,6 +24,7 @@ public class FavoriteMoviesDbHelper extends SQLiteOpenHelper {
         final String SQL_CREATE_FAVORTIE_MOVIESLIST_TABLE = "CREATE TABLE " +
                 FavoriteMovieListContract.ListEntry.TABLE_NAME + " (" +
                 FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_ID + " INTEGER PRIMARY KEY, " +
+                FavoriteMovieListContract.ListEntry.COLUMN_DATE + " INTEGER NOT NULL, " +
                 FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_TITLE + " TEXT NOT NULL, " +
                 "UNIQUE " + "(" + FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_ID + ")" + " ON CONFLICT REPLACE" +
                 ");";
