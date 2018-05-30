@@ -134,6 +134,9 @@ public class DetailsActivityFragment extends Fragment /*implements LoaderManager
                 Context context = view.getContext();
                 ContentValues cv = new ContentValues();
 
+                int i = 0;
+                int uniqueId = ++i;
+
                 if (isFavourite == true) {
 
                     //Deleting
@@ -142,13 +145,15 @@ public class DetailsActivityFragment extends Fragment /*implements LoaderManager
                     Uri uri = FavoriteMovieListContract.ListEntry.CONTENT_URI;
                     uri = uri.buildUpon().appendPath(stringId).build();
 
+
                     context.getContentResolver().delete(uri, null, null);
 
 
                 } else {
 
-                    cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_TITLE, movieObject.getTitle());
                     cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_ID, movieObject.getId());
+                    cv.put(FavoriteMovieListContract.ListEntry._ID, uniqueId);
+                    cv.put(FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_TITLE, movieObject.getTitle());
                     list.add(cv);
 
                     //Inserting new FavMovie data via ContentResolver

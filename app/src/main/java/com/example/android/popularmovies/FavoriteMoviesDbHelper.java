@@ -23,7 +23,8 @@ public class FavoriteMoviesDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         final String SQL_CREATE_FAVORTIE_MOVIESLIST_TABLE = "CREATE TABLE " +
                 FavoriteMovieListContract.ListEntry.TABLE_NAME + " (" +
-                FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_ID + " INTEGER PRIMARY KEY, " +
+                FavoriteMovieListContract.ListEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_ID + " INTEGER, " +
                 //FavoriteMovieListContract.ListEntry.COLUMN_DATE + " INTEGER NOT NULL, " +
                 FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_TITLE + " TEXT NOT NULL, " +
                 "UNIQUE " + "(" + FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_ID + ")" + " ON CONFLICT REPLACE" +

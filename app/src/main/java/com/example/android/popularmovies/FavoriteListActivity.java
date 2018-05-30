@@ -92,24 +92,6 @@ public class FavoriteListActivity extends AppCompatActivity implements
     @Override
     public Loader<Cursor> onCreateLoader(int id, final Bundle loaderArgs) {
 
-        /*switch (id) {
-            case FAVMOVIE_LOADER_ID:
-                Uri favoriteQueryUri = FavoriteMovieListContract.ListEntry.CONTENT_URI;
-                String sortOrder = FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_TITLE + " ASC";
-                String selection = FavoriteMovieListContract.ListEntry.getSqlSelectForTodayOnwards();
-                //String selection = null;
-
-                return new CursorLoader(this,
-                        favoriteQueryUri,
-                        MAIN_FAVORITES_PROJECTION,
-                        selection,
-                        null,
-                        sortOrder
-                        );
-                default:
-                    throw new RuntimeException("Loader not implemented: " + id);
-        }*/
-
         return new AsyncTaskLoader<Cursor>(this) {
 
             // Initialize a Cursor, this will hold all the task data
@@ -198,3 +180,22 @@ public class FavoriteListActivity extends AppCompatActivity implements
                 null);
     }
 }
+
+
+/*switch (id) {
+            case FAVMOVIE_LOADER_ID:
+                Uri favoriteQueryUri = FavoriteMovieListContract.ListEntry.CONTENT_URI;
+                String sortOrder = FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_TITLE + " ASC";
+                String selection = FavoriteMovieListContract.ListEntry.getSqlSelectForTodayOnwards();
+                //String selection = null;
+
+                return new CursorLoader(this,
+                        favoriteQueryUri,
+                        MAIN_FAVORITES_PROJECTION,
+                        selection,
+                        null,
+                        sortOrder
+                        );
+                default:
+                    throw new RuntimeException("Loader not implemented: " + id);
+        }*/
