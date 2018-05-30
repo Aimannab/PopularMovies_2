@@ -33,7 +33,7 @@ public class FavoriteMovieListContract {
         public static final String TABLE_NAME = "Favorite_Movies_List";
         public static final String COLUMN_NAME_MOVIE_TITLE = "title";
         public static final String COLUMN_NAME_MOVIE_ID = "id";
-        public static final String COLUMN_DATE = "date";
+        //public static final String COLUMN_DATE = "date";
 
         /**
          * Returns just the selection part of the favorites query from a normalized today value.
@@ -42,7 +42,7 @@ public class FavoriteMovieListContract {
          *
          * @return The selection part of the favorites query for today onwards
          */
-        public static String getSqlSelectForTodayOnwards() {
+        /*public static String getSqlSelectForTodayOnwards() {
             long normalizedUtcNow = normalizeDate(System.currentTimeMillis());
             return FavoriteMovieListContract.ListEntry.COLUMN_DATE + " >= " + normalizedUtcNow;
         }
@@ -57,7 +57,7 @@ public class FavoriteMovieListContract {
 
         private static long elapsedDaysSinceEpoch(long utcDate) {
             return TimeUnit.MILLISECONDS.toDays(utcDate);
-        }
+        }*/
     }
 }
 
