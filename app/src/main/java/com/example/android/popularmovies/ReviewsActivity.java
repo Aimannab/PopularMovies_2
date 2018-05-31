@@ -17,7 +17,6 @@ import static android.app.PendingIntent.getActivity;
  * Created by Aiman Nabeel on 11/04/2018.
  */
 
-//Not implemented yet
 public class ReviewsActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -40,7 +39,9 @@ public class ReviewsActivity extends AppCompatActivity {
         reviews_list_view = (ListView)findViewById(R.id.reviews_list_view);
         reviewsResponse = (ReviewsResponse)getIntent().getSerializableExtra("reviewsObject");
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         mAdapter = new ReviewsListAdapter(reviewsResponse.getReviewObjectAL(),this);
         reviews_list_view.setAdapter(mAdapter);
         TextView titleTextView = (TextView) findViewById(R.id.title);
@@ -48,15 +49,7 @@ public class ReviewsActivity extends AppCompatActivity {
         String reviews = getResources().getQuantityString(R.plurals.reviews_qty,count,count);
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
 
-        /*if (toolbar != null) {
-            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-            toolbar.hideOverflowMenu();
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }*/
-
         titleTextView.setText(reviews);
-
-
     }
 
     @Override
@@ -66,9 +59,4 @@ public class ReviewsActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    /*public Object getActivity() {
-        activity = this;
-        return activity;
-    }*/
 }

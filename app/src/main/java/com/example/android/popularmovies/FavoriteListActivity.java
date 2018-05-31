@@ -23,6 +23,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Aiman Nabeel on 11/05/2018.
+ */
+
 public class FavoriteListActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -82,19 +86,17 @@ public class FavoriteListActivity extends AppCompatActivity implements
 
 
     /**
-     * Instantiates and returns a new AsyncTaskLoader with the given ID.
+     * Instantiating and returning a new AsyncTaskLoader with the given ID.
      * This loader will return task data as a Cursor or null if an error occurs.
      *
-     * Implements the required callbacks to take care of loading data at all stages of loading.
+     * Implementing the required callbacks to take care of loading data at all stages of loading.
      */
-
-
     @Override
     public Loader<Cursor> onCreateLoader(int id, final Bundle loaderArgs) {
 
         return new AsyncTaskLoader<Cursor>(this) {
 
-            // Initialize a Cursor, this will hold all the task data
+            // Initializing a Cursor, this will hold all the task data
             Cursor mFavMovieData = null;
 
             // onStartLoading() is called when a loader first starts loading data
@@ -180,22 +182,3 @@ public class FavoriteListActivity extends AppCompatActivity implements
                 null);
     }
 }
-
-
-/*switch (id) {
-            case FAVMOVIE_LOADER_ID:
-                Uri favoriteQueryUri = FavoriteMovieListContract.ListEntry.CONTENT_URI;
-                String sortOrder = FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_TITLE + " ASC";
-                String selection = FavoriteMovieListContract.ListEntry.getSqlSelectForTodayOnwards();
-                //String selection = null;
-
-                return new CursorLoader(this,
-                        favoriteQueryUri,
-                        MAIN_FAVORITES_PROJECTION,
-                        selection,
-                        null,
-                        sortOrder
-                        );
-                default:
-                    throw new RuntimeException("Loader not implemented: " + id);
-        }*/

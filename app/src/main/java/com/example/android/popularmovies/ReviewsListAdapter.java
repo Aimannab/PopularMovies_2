@@ -13,7 +13,6 @@ import java.util.ArrayList;
  * Created by Aiman Nabeel on 11/04/2018.
  */
 
-//Not implemented yet
 @SuppressWarnings("ALL")
 public class ReviewsListAdapter extends BaseAdapter {
 

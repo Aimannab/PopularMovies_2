@@ -16,25 +16,16 @@ public class FavoriteMoviesListAdapter extends RecyclerView.Adapter<FavoriteMovi
 
     private Context mContext;
     private Cursor mCursor;
-
-    // COMPLETED (8) Add a new local variable mCount to store the count of items to be displayed in the recycler view
     private int mCount;
 
-    // COMPLETED (9) Update the Adapter constructor to accept an integer for the count along with the context
-    /**
-     * Constructor using the context and the db cursor
-     *
-     * @param context the calling context/activity
-     */
     public FavoriteMoviesListAdapter(Context context, Cursor cursor) {
         this.mContext = context;
-        // COMPLETED (10) Set the local mCount to be equal to count
         this.mCursor = cursor;
     }
 
     @Override
     public FavoritesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // Get the RecyclerView item layout
+        // Getting the RecyclerView item layout
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.favorite_list_item, parent, false);
         return new FavoritesViewHolder(view);
@@ -51,8 +42,6 @@ public class FavoriteMoviesListAdapter extends RecyclerView.Adapter<FavoriteMovi
 
     }
 
-
-    // COMPLETED (11) Modify the getItemCount to return the mCount value rather than 0
     @Override
     public int getItemCount() {
         return mCursor.getCount();
@@ -64,22 +53,18 @@ public class FavoriteMoviesListAdapter extends RecyclerView.Adapter<FavoriteMovi
      */
     class FavoritesViewHolder extends RecyclerView.ViewHolder {
 
-        // Will display the guest name
         TextView nameTextView;
-        // Will display the party size number
-        //TextView partySizeTextView;
 
         /**
          * Constructor for our ViewHolder. Within this constructor, we get a reference to our
          * TextViews
          *
-         * @param itemView The View that you inflated in
+         * @param itemView The View that is inflated in
          *                 {@link FavoriteMoviesListAdapter#onCreateViewHolder(ViewGroup, int)}
          */
         public FavoritesViewHolder(View itemView) {
             super(itemView);
             nameTextView = (TextView) itemView.findViewById(R.id.name_text_view);
-            //partySizeTextView = (TextView) itemView.findViewById(R.id.party_size_text_view);
         }
 
     }

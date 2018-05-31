@@ -35,7 +35,8 @@
             android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".ReviewsActivity"
-            android:parentActivityName=".DetailActivity"/>
+            android:parentActivityName=".DetailActivity">
+        </activity>
         <provider
             android:name="com.example.android.popularmovies.FavoritesContentProvider"
             android:authorities="com.example.android.popularmovies"

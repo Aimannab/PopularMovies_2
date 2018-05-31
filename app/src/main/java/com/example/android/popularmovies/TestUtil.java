@@ -22,9 +22,6 @@ public class TestUtil {
 
     public static void insertFakeData(SQLiteDatabase db) {
 
-
-
-
         if (db == null) {
             return;
         }
