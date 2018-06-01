@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Mov
                 .setRequestInterceptor(new RequestInterceptor() {
             @Override
             public void intercept(RequestFacade request) {
-                request.addEncodedQueryParam("api_key", "faaa06f746cc46c17d321731163eaae2");
+                request.addEncodedQueryParam("api_key", "12345678");
             }
         })
                 .setLogLevel(RestAdapter.LogLevel.FULL)

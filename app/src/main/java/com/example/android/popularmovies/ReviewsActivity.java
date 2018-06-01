@@ -12,7 +12,6 @@ import android.support.v7.widget.Toolbar;
 
 import static android.app.PendingIntent.getActivity;
 
-
 /**
  * Created by Aiman Nabeel on 11/04/2018.
  */
@@ -38,10 +37,6 @@ public class ReviewsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         reviews_list_view = (ListView)findViewById(R.id.reviews_list_view);
         reviewsResponse = (ReviewsResponse)getIntent().getSerializableExtra("reviewsObject");
-
-        if(getSupportActionBar() != null){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
         mAdapter = new ReviewsListAdapter(reviewsResponse.getReviewObjectAL(),this);
         reviews_list_view.setAdapter(mAdapter);
         TextView titleTextView = (TextView) findViewById(R.id.title);

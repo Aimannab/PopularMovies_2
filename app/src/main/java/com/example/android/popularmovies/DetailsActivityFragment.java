@@ -79,7 +79,7 @@ public class DetailsActivityFragment extends Fragment /*implements LoaderManager
 
     final String MOVIE_BASE_URL = "http://api.themoviedb.org/3/movie/";
     //TODO Remove this key before uploading the project
-    String api_key_value = "faaa06f746cc46c17d321731163eaae2";
+    String api_key_value = "12345678";
     final int MOVIE_PURPOSE_TRAILER = 1;
     final int MOVIE_PURPOSE_REVIEWS = 2;
     final String MOVIE_TRAILER_QUERY = "/videos?";
@@ -124,7 +124,6 @@ public class DetailsActivityFragment extends Fragment /*implements LoaderManager
                 .getBoolean(String.valueOf(movieObject.getId()), false);
         FavoriteCheckBox.setChecked(isFavourite);
 
-
         //Implementing onClickListener on the "Mark as Favorite" button and linking it with the Content Resolver
         FavoriteCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,14 +132,6 @@ public class DetailsActivityFragment extends Fragment /*implements LoaderManager
                 List<ContentValues> list = new ArrayList<ContentValues>();
                 Context context = view.getContext();
                 ContentValues cv = new ContentValues();
-
-                /*E.g. Delete a movie
-                int id2 = 299536;
-                String stringId2 = Integer.toString(id2);
-                Uri uri2 = FavoriteMovieListContract.ListEntry.CONTENT_URI;
-                uri2 = uri2.buildUpon().appendPath(stringId2).build();
-                context.getContentResolver().delete(uri2, null, null);*/
-
 
                 if (isFavourite == true) {
 

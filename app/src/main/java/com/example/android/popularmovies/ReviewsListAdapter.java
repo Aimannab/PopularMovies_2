@@ -13,6 +13,15 @@ import java.util.ArrayList;
  * Created by Aiman Nabeel on 11/04/2018.
  */
 
+/**********************************************************************************************
+ *    This code has been adapted from the following source:
+ *    Title: PopularMovies
+ *    Author: Ravi Sravan Kumar
+ *    Date: 2018
+ *    Code version: N/A
+ *    Availability: https://github.com/ravisravan89/PopularMovies
+ ***************************************************************************************/
+
 @SuppressWarnings("ALL")
 public class ReviewsListAdapter extends BaseAdapter {
 

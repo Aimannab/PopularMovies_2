@@ -25,7 +25,6 @@ public class FavoriteMoviesDbHelper extends SQLiteOpenHelper {
                 FavoriteMovieListContract.ListEntry.TABLE_NAME + " (" +
                 FavoriteMovieListContract.ListEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_ID + " INTEGER, " +
-                //FavoriteMovieListContract.ListEntry.COLUMN_DATE + " INTEGER NOT NULL, " +
                 FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_TITLE + " TEXT NOT NULL, " +
                 "UNIQUE " + "(" + FavoriteMovieListContract.ListEntry.COLUMN_NAME_MOVIE_ID + ")" + " ON CONFLICT REPLACE" +
                 ");";
